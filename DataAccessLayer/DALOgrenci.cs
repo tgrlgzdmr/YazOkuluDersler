@@ -64,5 +64,50 @@ namespace DataAccessLayer
             cmd2.Parameters.AddWithValue("@s1", par);
             return cmd2.ExecuteNonQuery()>0;
         }
+
+        public static List<EntityOgrenci> OgrenciDetay(int u)
+        {
+            List<EntityOgrenci> degerler = new List<EntityOgrenci>();
+            SqlCommand cmd3 = new SqlCommand("select * from TblOgrenci where Ogrid=@p1 ", Baglanti.bgl);
+            if (cmd3.Connection.State != ConnectionState.Open)
+            {
+                cmd3.Connection.Open();
+            }
+            cmd3.Parameters.AddWithValue("@p1", u);
+            SqlDataReader dr = cmd3.ExecuteReader();
+            while (dr.Read())
+            {
+                EntityOgrenci ent = new EntityOgrenci();
+                ent.AD = dr["OgrAd"].ToString();
+                ent.SOYAD = dr["OgrSoyad"].ToString();
+                ent.NO = dr["OgrNo"].ToString();
+                ent.MAIL = dr["OgrMail"].ToString();
+                ent.SIFRE = dr["OgrSifre"].ToString();
+                ent.BAKIYE = Convert.ToDouble(dr["OgrBakiye"].ToString());
+                ent.FOTOGRAF = dr["OgrFoto"].ToString();
+                degerler.Add(ent);
+            }
+            dr.Close();
+            return degerler;
+        }
+
+        public static bool OgrenciGuncelle(EntityOgrenci up)
+        {
+            SqlCommand cmd4 = new SqlCommand("update TblOgrenci set OgrAd=@p1,OgrSoyad=@p2,OgrNo=@p3,OgrMail=@p4,OgrSifre=@p5,OgrFoto=@p6 where Ogrid=@p7", Baglanti.bgl);
+            if (cmd4.Connection.State != ConnectionState.Open)
+            {
+                cmd4.Connection.Open();
+            }
+            cmd4.Parameters.AddWithValue("@p1", up.AD);
+            cmd4.Parameters.AddWithValue("@p2", up.SOYAD);
+            cmd4.Parameters.AddWithValue("@p3", up.NO);
+            cmd4.Parameters.AddWithValue("@p4", up.MAIL);
+            cmd4.Parameters.AddWithValue("@p5", up.SIFRE);
+            cmd4.Parameters.AddWithValue("@p6", up.FOTOGRAF);
+            cmd4.Parameters.AddWithValue("@p7", up.ID);
+
+            return cmd4.ExecuteNonQuery() > 0;
+        }
+
     }
 }

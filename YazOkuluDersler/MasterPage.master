@@ -21,7 +21,7 @@
       <li><a href="#">ANASAYFA</a></li>
       <li><a href="OgrenciListesi.aspx">ÖĞRENCİLER</a></li>
       <li><a href="#">ÖĞRETMENLER</a></li>
-      <li><a href="#">DERSLER</a></li>
+      <li><a href="Dersler.aspx">DERSLER</a></li>
       <li><a href="#">KONTENJANLAR</a></li>
         <li><a href="Default.aspx">ÖĞRENCİ EKLE</a></li>
       <li><a href="#">YARDIM</a></li>
